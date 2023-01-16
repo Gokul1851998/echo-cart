@@ -1,0 +1,70 @@
+<%-include('../admin/layout/admin-header-layout.ejs') -%>
+
+  <div class="col-lg">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title"  style="color: #000; font-size: larger; font-weight: bold;">Update</div>
+        <hr>
+        <form action="/admin/updateproduct/<%= products._id %>" method="post" enctype="multipart/form-data">
+        
+
+
+          <div class="form-group">
+            <label for="input-4" style="color: #000;">Name</label>
+            <input class="form-control"  id="input-4" type="text"  required name="productName" value="<%= products.productName %>">
+          </div>
+
+          <div class="form-group">
+            <label for="input-5"  style="color: #000;">Category</label>
+            <select class="group input-group form-control" name="category" id="">
+              <% category.forEach(function(category){ %>
+                <option value="<%= category.category %>">
+                  <%= category.category %>
+                </option>
+                <% }) %>
+              </select>
+          </div> 
+
+          <div class="form-group">
+            <label for="input-5"  style="color: #000;">Size</label>
+            <select class="group input-group form-control" name="size" id="">
+              <% size.forEach(function(size){ %>
+                <option value="<%= size.size %>">
+                  <%= size.size %>
+                </option>
+                <% }) %>
+              </select>
+          </div>
+
+          <div class="form-group">
+            <label for="input-5"  style="color: #000;">Price</label>
+            <input class="form-control" id="input-5" type="tel"  required name="price" value="<%= products.price %>">
+          </div>
+          
+          <div class="form-group">
+            <label for="input-5"  style="color: #000;">Description</label>
+            <input class="form-control" id="input-5" type="tel" required name="description" value="<%= products.description %>">
+          </div>
+
+          <div class="form-group">
+            <label for="input-5"  style="color: #000;">Image</label>
+            <input type="file" multiple class="form-control" id="input-5"  name="Image" onchange="viewimage(event)"
+              placeholder="Choose an image" />
+              <img src="/images/product/<%= products.Image %>" style="width: 100px ; height: 100px ;" id="imageview">
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-warning "> Update Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    function viewimage(event){
+      document.getElementById('imageview').src=URL.createObjectURL(event.target.files[0])
+    }
+  </script>
+
+
+  <%-include('../admin/layout/admin-footer-layout') -%>

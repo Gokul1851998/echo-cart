@@ -1,0 +1,88 @@
+<%-include('../admin/layout/admin-header-layout.ejs') -%>
+
+<div  class="container-fluid" style="min-height: 80vh !important;">
+    <h4 class="section-title position-relative text-uppercase mb-3 ml-5"><span class=" pr-3">Users Orders</span></h4>
+    <div id="productCard" class="row px-xl-5">
+            
+            <table  class="table table-light table-borderless table-hover text-center mb-0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Order.No</th>
+                        <th>Order Id</th>
+                        <th>User Name</th>
+                        <th>Amount</th>
+                        <th>Payment Mode</th>
+                        <th>Order Details</th>
+                        <th>Status</th>
+                        
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    <% orders.forEach((obj,index)=>{ %> 
+                    <tr>
+                        <td  class="align-middle"><%= index+1 %> </td>
+                        <td class="align-middle"><%= obj._id %> </td>
+                        <td class="align-middle"><%= obj.userId?.userName %> </td>
+                        <td class="align-middle"><span>Rs.</span><%= obj.totalAmount %> </td>
+                        <td class="align-middle"> <%= obj.paymentMethod %> </td>
+                        <td class="align-middle"><a href="/admin/viewDetails/<%= obj._id %>" class="btn btn-success">View</a> </td>
+                        <% if (obj.orderStatus=='Canceled') { %>
+                            <td style="font-size: 1rem;" class="text-danger font-weight-bold"><%=obj.orderStatus%></td>
+                         <%} else if(obj.orderStatus=='Delivered') { %>
+                          <td style="font-size: 1rem;" class="text-success font-weight-bold pr-1"><%=obj.orderStatus%></td>
+                          <% }else{ %> 
+                         <td class="pl-5">
+                            <select id="OStatus<%=index%>" style="width: 7.5rem;" onchange="statusOrder('<%=obj._id%>','<%=index%>')"
+                                class=" custom-select font-weight-bold bg-transparent text-info border-0 "
+                                name="orderStatus">
+              
+                                <option value="<%= obj.orderStatus %>">
+                                    <%= obj.orderStatus %>
+                                </option>
+                                <option class="text-dark font-weight-bold" value="Placed">Placed</option>
+                                <option class="text-dark font-weight-bold" value="Processed">Processed</option>
+                                <option class="text-dark font-weight-bold" value="Shipped">Shipped</option>
+                                <option class="text-dark font-weight-bold" value="Delivered">Delivered</option>
+                              </select>
+                         </td>
+                         <% } %>
+                    </tr>
+                    <% }) %> 
+                </tbody>
+         
+            </table>
+    </div>
+</div>
+
+<%-include('../admin/layout/admin-footer-layout') -%>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script>
+  function statusOrder(orderId, index) {
+    const status = $(`#OStatus${index}`).val()
+    console.log(orderId, status,'hiii');
+    console.log(status,'status');
+    $.ajax({
+      url: '/admin/status_change',
+      data: {
+        orderId,
+        status
+      },
+      method: 'post',
+      success: ((response) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Order Changed',
+          customClass: 'swal-wide',
+          showConfirmButton: false,
+          timer: 1000
+        }).then(()=>{
+          location.reload()
+        })
+        
+      })
+    })
+
+  }
+</script>

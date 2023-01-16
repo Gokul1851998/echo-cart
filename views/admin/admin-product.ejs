@@ -1,0 +1,72 @@
+<%- include('../admin/layout/admin-header-layout.ejs') -%>
+
+  <div class="col-lg">
+    <div class="card">
+      <div class="card-body ">
+        <div style="display: flex; justify-content: space-between;">
+          <h5 class="card-title">Products</h5>
+          <div>
+            <form action="/admin/addproductpage" method="get">
+              <button class="btn btn-success me-md-2 mb-3" type="submit">Add Product</button>
+            </form>
+          </div>
+
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Size</th> 
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">OPTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% totalproducts.forEach(function(totalproducts,index){ %>
+                <tr>
+                  <th scope="row">
+                    <%= index+1 %>
+                  </th>
+                  <td>
+                    <%= totalproducts.productName %>
+                  </td>
+                  <td>
+                    <%= totalproducts.category%>
+                  </td>
+                  
+                    <td>
+                      <%= totalproducts.size%>
+                    </td>
+                    <td>
+                    <%= totalproducts.description %>
+                  </td>
+                  <td>
+                    <%= totalproducts.price %>
+                 </td>
+                 <td><img src='/images/product/<%= totalproducts.Image[0] %>' alt="" class="bt-0"  style="height: 50px; width: 50px;"></td>
+               <td>
+               
+                  <a href="/admin/editproductpage/<%= totalproducts._id %>" class="p  bg-warning px-1 py-2 rounded " type="button" value="Submit" style="text-decoration: none; font-weight: bold; color: #fff;"> Update </a>
+                      <a href="/admin/deleteproduct/<%= totalproducts._id %>" class="p bg-danger px-1 py-2 rounded " type="button" value="Submit" style="text-decoration: none; font-weight: bold; color:#fff;">Delete</a>
+                    
+                
+            
+               </td>
+              </tr>
+              <% }) %>
+             
+         
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../admin/layout/admin-footer-layout.ejs') -%>

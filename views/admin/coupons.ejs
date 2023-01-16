@@ -1,0 +1,52 @@
+<%-include('../admin/layout/admin-header-layout.ejs') -%>
+<section class="container w-500" >
+<div class="col-lg">
+    <div class="card">
+      <div class="card-body ">
+    <div class="account-content bg-white pt-0">
+    <h4 class="account-content-title"><i class="far fa-layer-group"></i>Add Coupon</h4>
+    <div class="edit-profile">
+    <form  action="/admin/addCoupon" method="post" >
+    <div class="row">
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="name" class="form-label">Coupon Name</label>
+    <input type="text" class="form-control" required   name="couponName" id="name">
+    </div>
+    </div>
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="name" class="form-label">Coupon ID</label>
+     <input type="text" class="form-control" required   name="couponId" id="name">
+    </div>
+    </div>
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="stock" class="form-label">Discount</label>
+    <input type="number" class="form-control" required  name="couponDiscount"  id="stock">
+    </div>
+    </div>
+    <div class="col-lg-6">
+    <div class="mb-3">
+    <label for="price" class="form-label">Expired Date</label>
+    <input type="date" class="form-control" name="couponExpiredDate"  required    id="price">
+    </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="mb-3">
+        <label for="name" class="form-label">Amount</label>
+         <input type="number" class="form-control"   name="Amount" id="Amount">
+        </div>
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit">Save Coupon</button>
+     </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+</section>
+
+<%-include('../admin/layout/admin-footer-layout') -%>

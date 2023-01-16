@@ -1,0 +1,89 @@
+  
+<%- include('../user/layout/user-header.ejs') -%>
+
+
+<!-- Breadcrumb End -->
+<div class="container-fluid">
+ 
+   
+    <h4 class="position-relative  mb-3 ml-5"><span class="bg-secondary pr-3">Showing results for </span ><span class="pl-2 ">"</span><span class="text-info" ><%=search%></span>"<span</h4>
+
+
+</div>
+
+<!-- Shop Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+       <% if(product.length){%>
+
+              <% product.forEach(function(totalproducts){ %>
+              <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                  <div class="product-item bg-light mb-4">
+                      <div class="product-img position-relative overflow-hidden">
+                          <a href="/product-page/<%= totalproducts._id %>"><img class="img-fluid w-100" src='/images/product/<%= totalproducts.Image[0] %>' alt=""></a>
+                          <div class="product-action">
+                             
+                             
+                              <a onclick="addToWishlist('<%= totalproducts._id %>','<%=totalproducts.productName %>')" class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                              <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                              <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                          </div>
+                      </div>
+                      <div class="text-center py-4">
+                          <a class="h6 text-decoration-none text-truncate" href="/product-page/<%= totalproducts._id %>"><%= totalproducts.productName  %> </a>
+                          <div class="d-flex align-items-center justify-content-center mt-2">
+                              <h5>₹ <%= totalproducts.price %> </h5><h6 class="text-muted ml-2">
+                                  <!-- <del>$123.00</del> --><h5 > <span class="bg-secondary pr-3 align-items-center rounded"><%= totalproducts.size %></span></h5>
+                              </h6>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-center mt-2">
+                              <h5> <%= totalproducts.description %> </h5>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-center mb-1">
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small class="fa fa-star text-primary mr-1"></small>
+                              <small>(99)</small>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <% }) %> 
+          </div>
+      </div>
+      <%}else{%>
+        <div class="container-fluid  mt-100 ">
+            <div class="row">
+            
+             <div class="col-md-12">
+             
+                 
+               
+               <div class="card-body cart">
+                   <div class="col-sm-12 empty-cart-cls text-center">
+                     <img src="https://cdnblog.webkul.com/blog/wp-content/uploads/2018/12/Product-Search-Not-Found-1.png" width="250" height="250" class="img-fluid  mr-3">
+                     <h3><strong>Sorry, no results found!</strong></h3>
+                     <h4>Please check the spelling or try searching for something else</h4>
+                     <a href="/shopping" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                     
+                   
+                   </div>
+               </div>
+           
+               
+             
+             </div>
+            
+            </div>
+           
+           </div>
+           <%}%>
+      <!-- Shop Product End -->
+  </div>
+</div>
+
+
+
+<%- include('../user/layout/user-footer.ejs') -%>

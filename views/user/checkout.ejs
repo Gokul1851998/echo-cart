@@ -1,0 +1,233 @@
+<%- include('../user/layout/user-header.ejs') -%>
+
+<div class="container-fluid">
+  <form id="place-order">
+    <div class="row px-xl-5">
+      
+        <div class="col-lg-8">
+ 
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Address</span></h5>
+            <div class="form-group">
+              <a href="/newAddress" class="btn btn-success float-right px-3 rounded"> Add Address</a> 
+              </div><br><br>
+              <% userAddress.forEach((x) => { %> 
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom">
+
+                    <div class="card bg-light ext-white   " style="width: auto; height: auto;">
+                        <div class="form-check checkbox-xl ml-auto ">
+                            <input class="form-check-input"  type="radio" checked value="<%= x._id %> "
+                                name="address">
+
+                        </div>
+                        <div class="card-body text-left">
+                            <table class="table">
+                                <h2>Address</h2>
+                               
+                                  <tr>
+                                    <th scope="col">First Name :</th>
+                                    <th scope="col"><%= x.firstName %> </th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">Last Name :</th>
+                                    <th scope="col"><%= x.lastName %></th>
+                                  </tr> <tr>
+                                    <th scope="col">Email :</th>
+                                    <th scope="col"><%= x.email %></th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">Phone :</th>
+                                    <th scope="col"><%= x.mobNumber %></th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">Home Address :</th>
+                                    <th scope="col"><%= x.homeaddress %></th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">Country :</th>
+                                    <th scope="col"><%= x.country %></th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">City :</th>
+                                    <th scope="col"><%= x.city %></th>
+                                  </tr>
+                                  <tr>
+                                    <th scope="col">State :</th>
+                                    <th scope="col"><%= x.state %></th>
+                                  </tr>
+                                  <tr>
+                                   <th> 
+                                    <button onclick="updateAdreess('<%= x._id %>')" class=" bg-warning px-3 py-2 rounded " type="button" value="Submit" style="text-decoration: none; font-weight: bold; color: #fff; border-color: #fff;"> Update </a>
+                                    <button onclick="deleteAddress('<%= x._id%>')" class=" bg-danger px-3 py-2 rounded " type="button" value="Submit" style="text-decoration: none; font-weight: bold; color:#fff; border-color: #fff;">Delete</button></th>
+                                  </tr>
+                              </table>
+                        </div>
+                    </div>
+                  
+                  </div>
+                  </div>
+             
+              <% }) %>
+              
+
+        </div>
+        <div class="col-lg-4">
+            
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+            <div class="bg-light p-30 mb-5">
+                <div class="border-bottom">
+                    <h6 class="mb-3">Payment Details</h6>
+            
+                </div>
+                <div class="border-bottom pt-3 pb-2">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6>Subtotal</h6>
+                        <h6>₹<%= Total %></h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">Free</h6>
+                    </div>
+                </div>
+                <input type="text" name="userId" value="<%= user._id %>" hidden>
+                <input type="text" name="Total" value="<%= Total %>" hidden>
+                <div class="pt-2">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5>Total</h5>
+                        <h5 >₹<%= Total %></h5>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="mb-5">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
+                <div class="bg-light p-30">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="payment" id="paypal" value="COD">
+                            <label class="custom-control-label" for="paypal">Cash on delivery</label>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group mb-4">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="payment" id="banktransfer" value="banktransfer">
+                            <label class="custom-control-label" for="banktransfer">Razorpay</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary font-weight-bold py-3" >Place Order</button>
+
+                    
+                </div>
+            </div>
+        
+        </div>
+   
+    </div>
+  </form>
+</div>
+<script>
+     $("#place-order").submit((e) => {
+            e.preventDefault()
+            $.ajax({
+                url: '/user_order',
+                method: 'post',
+                data: $('#place-order').serialize(),
+                success: (response) => {
+                    if (response.codSuccess) {
+                        console.log('this is worked');
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Order Placed',
+                            text: "Shop again",
+                            customClass: 'swal-wide',
+                            confirmButtonText: 'OK',
+                            showConfirmButton: true,
+                      
+                        }).then((result) => {
+                          location.href = '/orderSuccess'
+                        })
+                    }else {
+                    if (response.order == null) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Connection Failed',
+                            text: 'Please Check the Internet Connection!',
+                            customClass: 'swal-wide',
+                        })
+                    } else {
+                        razorpayPayment(response)
+                    }
+                }
+                  }
+                })
+                })
+    
+            function razorpayPayment(Payment) {
+            var options = {
+                "key": "rzp_test_LS04j2FVS1akZj", // Enter the Key ID generated from the Dashboard
+                "amount": Payment.order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",  
+                "name": "Echo Kart ",
+                "description": "Complete Your Transaction",
+                "image": "",
+                "order_id": Payment.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    verifyPayment(response, Payment.order)
+                }, 
+                "prefill": {
+                    "name": Payment.userOrder.Address.firstName + " " + Payment.userOrder.Address.lastName,
+                    "email": Payment.User.email,
+                    "contact": Payment.userOrder.Address.mobileNo
+                },
+                "notes": {
+                    "address": "Home electron Choose your electric Best for Home"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+       function verifyPayment(payment, order) {
+            $.ajax({
+                url: '/verify_payment',
+                data: {
+                    payment: payment,
+                    orders: order
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.status) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Payment Success',
+                            showConfirmButton: false,
+                            customClass: 'swal-wide',
+                            timer: 1000
+                        }).then((result) => {
+                            location.href = '/orderSuccess'
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Payment Failed',
+                            showConfirmButton: false,
+                            customClass: 'swal-wide',
+                            timer: 1000
+                        }).then((result) => {
+                            location.reload() 
+                        })
+                    }
+                }
+            })
+        }
+
+      
+</script>
+
+<%- include('../user/layout/user-footer.ejs') -%>
