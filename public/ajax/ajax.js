@@ -6,12 +6,20 @@ function addToCart(id) {
     success: (response) => {
     
       if (response.status) {
-        let cartCount = $("#cartCount").html();
-        cartCount = parseInt(cartCount) + 1; 
-        $("#cartCount").html(cartCount);
+
+        let cartCount = $("#cartCount").html()
+        cartCount = parseInt(cartCount) + 1 
+        $("#cartCount").html(cartCount)
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: " Added ",
+          customClass: "swal-wide",
+          showConfirmButton: true
+      })
       }
     },
-  });
+  }); 
 }
 
 function deleteCart(productId, quantity) {

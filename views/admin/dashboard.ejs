@@ -1,133 +1,136 @@
 <%- include('../admin/layout/admin-header-layout.ejs') -%>
 
-<div class="content-wrapper">
-  <!-- Content -->
+  <div class="content-wrapper">
+    <!-- Content -->
 
-  <div class="container flex-grow-1 container-p-y">
-    <div class="row">
+    <div class="container flex-grow-1 container-p-y">
+      <div class="row">
 
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">₹ <%=totalIncome%></div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    Earnings (Monthly)</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">₹ <%=totalIncome%>
+                  </div>
                 </div>
+                <div class="col-auto">
+                  <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
 
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Earnings (Annual)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">₹ <%=totalIncome%></div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                    Earnings (Annual)</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">₹ <%=totalIncome%>
+                  </div>
                 </div>
+                <div class="col-auto">
+                  <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
 
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Payment Pending
-                        </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%=pending %></div>
-                            </div>
-                            
-                        </div>
-                    </div>
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Payment Pending
+                  </div>
+                  <div class="row no-gutters align-items-center">
                     <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                        <%=pending %>
+                      </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-danger shadow h-100 py-2">
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-danger shadow h-100 py-2">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                            Canceled Orders</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><%= canceledOrder%></div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                    Canceled Orders</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">
+                    <%= canceledOrder%>
+                  </div>
                 </div>
+                <div class="col-auto">
+                  <i class="fas fa-comments fa-2x text-gray-300"></i>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
 
-      <!-- Area Chart -->
-      <div class="col-xl-8 col-lg-7">
+        <!-- Area Chart -->
+        <div class="col-xl-8 col-lg-7">
           <div class="card shadow mb-4">
-              <!-- Card Header - Dropdown -->
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Monthly Sales</h6>
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Monthly Sales</h6>
             </div>
             <div class="card-body">
-                <h4 class="small font-weight-bold">Nov <span
-                        class="float-right">0%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 0%"
-                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Dec<span
-                        class="float-right">0%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"
-                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Jan <span
-                        class="float-right"><%=monthly %> %</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 35%"
-                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Feb <span
-                        class="float-right">0%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 0%"
-                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Mar<span
-                  class="float-right">0%</span></h4>
-          <div class="progress mb-4">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"
-                  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
+              <h4 class="small font-weight-bold">Nov <span class="float-right">0%</span></h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="20"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Dec<span class="float-right">0%</span></h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="40"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Jan <span class="float-right">
+                  <%=monthly %> %
+                </span></h4>
+              <div class="progress mb-4">
+                <div class="progress-bar" role="progressbar" style="width: 35%" aria-valuenow="60" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Feb <span class="float-right">0%</span></h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="80"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <h4 class="small font-weight-bold">Mar<span class="float-right">0%</span></h4>
+              <div class="progress mb-4">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="40"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
             </div>
-              <!-- Card Body -->
-    
-          </div>
-      </div>
+            <!-- Card Body -->
 
-      <!-- Pie Chart -->
-      <div class="col-xl-4 col-lg-5">
+          </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
           <div class="card shadow mb-4">
             <div class="card-header">Weekly sales
               <div class="card-action">
@@ -149,7 +152,7 @@
               <div class="chart-container-2">
                 <!-- <canvas id="chart2"></canvas> -->
                 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-    
+
               </div>
             </div>
             <div class="table-responsive">
@@ -161,279 +164,290 @@
 
                   <tr>
                     <td><i class="fa fa-circle text-dark mr-2"></i>Cash on Delivery</td>
-                    <td id="COD"><%= onlineCount %></td>
+                    <td id="COD">
+                      <%= onlineCount %>
+                    </td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><i class="fa fa-circle text-secondry mr-2"></i>Online Payment</td>
-                    <td id="Online"><%= codCount %></td>
+                    <td id="Online">
+                      <%= codCount %>
+                    </td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+        </div>
       </div>
-  </div>
 
 
 
 
 
 
-    <div class="row">
-      <div class="col-lg-8 mb-4 order-0">
-        <div class="card shadow mb-4">
-          <div class="d-flex align-items-end row">
-            <div class="col-sm-7">
-              <div class="card-body">
-                <h5 class="card-title text-primary">
-                  Congratulations Gokul! 🎉
-                </h5>
-                <p class="mb-4">
-                  You have <span class="fw-bold"> </span> new
-                  orders today. Check your order's list for more information.
-                </p>
+      <div class="row">
+        <div class="col-lg-8 mb-4 order-0">
+          <div class="card shadow mb-4">
+            <div class="d-flex align-items-end row">
+              <div class="col-sm-7">
+                <div class="card-body">
+                  <h5 class="card-title text-primary">
+                    Congratulations Gokul! 🎉
+                  </h5>
+                  <p class="mb-4">
+                    You have <span class="fw-bold"> </span> new
+                    orders today. Check your order's list for more information.
+                  </p>
 
-                <a href="/admin/orders" class="btn btn-sm btn-outline-primary">View Orders</a>
+                  <a href="/admin/orders" class="btn btn-sm btn-outline-primary">View Orders</a>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-5 text-center text-sm-left">
-              <div class="card-body pb-0 px-0 px-md-4">
-                <img src="https://4db32cf36e284b6db016-ad73e30e75b87c0c9aedc3f926a99c84.ssl.cf3.rackcdn.com/wp-content/uploads/2019/11/giphy-6.gif" height="150"
-                  alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                  data-app-light-img="illustrations/man-with-laptop-light.png" />
+              <div class="col-sm-5 text-center text-sm-left">
+                <div class="card-body pb-0 px-0 px-md-4">
+                  <img
+                    src="https://4db32cf36e284b6db016-ad73e30e75b87c0c9aedc3f926a99c84.ssl.cf3.rackcdn.com/wp-content/uploads/2019/11/giphy-6.gif"
+                    height="150" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                    data-app-light-img="illustrations/man-with-laptop-light.png" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-lg-4 col-md-4 order-1">
-        <div class="row">
-          <div class="col-lg-6 col-md-12 col-6 mb-4">
-            <div class="card shadow mb-4">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-center justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    <img src="https://cdn.pixabay.com/photo/2016/08/19/20/37/time-1606153_960_720.png" alt="chart success"
-                      class="rounded " style="width: 50px; height: 50px;" />
-                     
+        <div class="col-lg-4 col-md-4 order-1">
+          <div class="row">
+            <div class="col-lg-6 col-md-12 col-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-center justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                      <img src="https://cdn.pixabay.com/photo/2016/08/19/20/37/time-1606153_960_720.png"
+                        alt="chart success" class="rounded " style="width: 50px; height: 50px;" />
+
+                    </div>
                   </div>
+                  <span class="fw-semibold d-block mb-1">Live Orders</span>
+                  <h2 class="card-title mb-2 text-center">
+                    <%= liveOrders %>
+                  </h2>
                 </div>
-                <span class="fw-semibold d-block mb-1">Live Orders</span>
-                <h2 class="card-title mb-2 text-center">
-               <%= liveOrders %> 
-                </h2>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-md-12 col-6 mb-4">
-            <div class="card shadow mb-4">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <!-- <img src="../public/admin/img/icons/unicons/wallet.png" alt="User" class="rounded" /> -->
-                    <h1 class="fa fa-wallet" style="color: forestgreen;"></h1>
-                  </div>
-                </div>
-                <span>Total Sales</span>
-                <h5 class="card-title text-nowrap mb-1 pt-2">₹<%= totalIncome %>
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- NEW ORDERS -->
-      <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4" >
-        <div class="card shadow mb-4">
-          <h5 class="card-header">New orders</h5>
-          <div class="table" style="overflow-x:auto;">
-            <table class="table table-hover text-center">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>No.Products</th>
-                  <th>Total</th>
-                  <th>Payment</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody class="table-border-bottom-0">
-                <% newOrders.forEach(function(order){ %>
-                  <tr>
-                    <td>
-                      <%= order.createdAt.toLocaleDateString() %> 
-                    </td>
-                    <td>
-                     <%= order.totalProduct %> 
-                    </td>
-                    <td>
-                     <%= order.totalAmount %> 
-                    </td>
-
-                    <% if (order.paymentMethod=="COD" ){ %>
-                      <td>
-                           <p class="text-warning">PENDING</p>
-                        </td>
-                      <% }else{ %>
-                        <td>
-                       
-                          <p class="text-success">PAID</p>
-                     
-                        </td>
-                        <% } %>
-                          <td>
-                            <a href="/admin/viewDetails/<%= order._id %>" class="btn">
-                              <span  class="fa fa-info rounded-circle"></span>
-                            </a>
-                          </td>
-                  </tr>
-                <% }) %> 
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-        <div class="row">
-          <div class="col-6 mb-4">
-            <div class="card shadow mb-4">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    
-                    <h1 class="fa fa-credit-card" style="color: rgb(209, 212, 21);"></h1>
-                  </div>
-                </div>
-                <span class="d-block mb-1">Payment Paid</span>
-                <h4 class="card-title text-nowrap mb-2">₹ <%= payments %> 
-                </h4>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 mb-4">
-            <div class="card shadow mb-4">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <h1 class="fa fa-users" style="color: rgb(21, 134, 144)"></h1>
-                  </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Active users</span>
-                <h3 class="card-title mb-2 text-center"> <%= usersCount %></h3>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-12 mb-4">
-            <div class="card shadow mb-4">
-              <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="card-title m-0 me-2">New users</h5>
-              </div>
-              <div class="card-body">
-                <ul class="p-0 m-0">
-                  <% newUsers.forEach(function(user){ %> 
-                  <li class="d-flex mb-4 pb-1">
+            <div class="col-lg-6 col-md-12 col-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
                     <div class="avatar flex-shrink-0 me-3">
-                      <h1 class="fa fa-bell" style="color: rgb(16, 108, 221);"></h1>
+                      <!-- <img src="../public/admin/img/icons/unicons/wallet.png" alt="User" class="rounded" /> -->
+                      <h1 class="fa fa-wallet" style="color: forestgreen;"></h1>
                     </div>
-                    <div class="d-flex w-100 flex-wrap align-items-center">
-                      <div class="me-2">
-                        <h6 class="mb-0 ml-5"><%= user.userName %>  </h6>
-                        <small class="text-muted d-block mb-1 ml-5"><%= moment(user.createdAt).format("LLL")  %></small>
-                      </div>
+                  </div>
+                  <span>Total Sales</span>
+                  <h5 class="card-title text-nowrap mb-1 pt-2">₹<%= totalIncome %>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW ORDERS -->
+        <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+          <div class="card shadow mb-4">
+            <h5 class="card-header">New orders</h5>
+            <div class="table" style="overflow-x:auto;">
+              <table class="table table-hover text-center">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>No.Products</th>
+                    <th>Total</th>
+                    <th>Payment</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                  <% newOrders.forEach(function(order){ %>
+                    <tr>
+                      <td>
+                        <%= order.createdAt.toLocaleDateString() %>
+                      </td>
+                      <td>
+                        <%= order.totalProduct %>
+                      </td>
+                      <td>
+                        <%= order.totalAmount %>
+                      </td>
+
+                      <% if (order.paymentMethod=="COD" ){ %>
+                        <td>
+                          <p class="text-warning">PENDING</p>
+                        </td>
+                        <% }else{ %>
+                          <td>
+
+                            <p class="text-success">PAID</p>
+
+                          </td>
+                          <% } %>
+                            <td>
+                              <a href="/admin/viewDetails/<%= order._id %>" class="btn">
+                                <span class="fa fa-info rounded-circle"></span>
+                              </a>
+                            </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+          <div class="row">
+            <div class="col-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+
+                      <h1 class="fa fa-credit-card" style="color: rgb(209, 212, 21);"></h1>
                     </div>
-                  </li>
-               <% }) %> 
-                </ul>
+                  </div>
+                  <span class="d-block mb-1">Payment Paid</span>
+                  <h4 class="card-title text-nowrap mb-2">₹ <%= payments %>
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0 me-3">
+                      <h1 class="fa fa-users" style="color: rgb(21, 134, 144)"></h1>
+                    </div>
+                  </div>
+                  <span class="fw-semibold d-block mb-1">Active users</span>
+                  <h3 class="card-title mb-2 text-center">
+                    <%= usersCount %>
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <h5 class="card-title m-0 me-2">New users</h5>
+                </div>
+                <div class="card-body">
+                  <ul class="p-0 m-0">
+                    <% newUsers.forEach(function(user){ %>
+                      <li class="d-flex mb-4 pb-1">
+                        <div class="avatar flex-shrink-0 me-3">
+                          <h1 class="fa fa-bell" style="color: rgb(16, 108, 221);"></h1>
+                        </div>
+                        <div class="d-flex w-100 flex-wrap align-items-center">
+                          <div class="me-2">
+                            <h6 class="mb-0 ml-5">
+                              <%= user.userName %>
+                            </h6>
+                            <small class="text-muted d-block mb-1 ml-5">
+                              <%= moment(user.createdAt).format("LLL") %>
+                            </small>
+                          </div>
+                        </div>
+                      </li>
+                      <% }) %>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- / Content -->
+
   </div>
-  <!-- / Content -->
-  
-</div>
 
 
 
 
 
 
-<%- include('../admin/layout/admin-footer-layout.ejs') -%>
-<script src="/javascripts/admin/homejs/jquery.min.js"></script>
-<script src="/javascripts/admin/homejs/popper.min.js"></script>
-<script src="/javascripts/admin/homejs/bootstrap.min.js"></script>
+  <%- include('../admin/layout/admin-footer-layout.ejs') -%>
+    <script src="/javascripts/admin/homejs/jquery.min.js"></script>
+    <script src="/javascripts/admin/homejs/popper.min.js"></script>
+    <script src="/javascripts/admin/homejs/bootstrap.min.js"></script>
 
-<!-- simplebar js -->
-<script src="/plugins/admin/home/simplebar/js/simplebar.js"></script>
-<!-- sidebar-menu js -->
-<script src="/javascripts/admin/homejs/sidebar-menu.js"></script>
-<!-- loader scripts -->
-<!-- <script src="/javascripts/admin/homejs/jquery.loading-indicator.js"></script> -->
-<!-- Custom scripts -->
-<script src="/javascripts/admin/homejs/app-script.js"></script>
-<!-- Chart js -->
+    <!-- simplebar js -->
+    <script src="/plugins/admin/home/simplebar/js/simplebar.js"></script>
+    <!-- sidebar-menu js -->
+    <script src="/javascripts/admin/homejs/sidebar-menu.js"></script>
+    <!-- loader scripts -->
+    <!-- <script src="/javascripts/admin/homejs/jquery.loading-indicator.js"></script> -->
+    <!-- Custom scripts -->
+    <script src="/javascripts/admin/homejs/app-script.js"></script>
+    <!-- Chart js -->
 
-<script src="/plugins/admin/home/Chart.js/Chart.min.js"></script>
+    <script src="/plugins/admin/home/Chart.js/Chart.min.js"></script>
 
-<!-- Index js -->
-<script src="/javascripts/admin/homejs/index.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- Index js -->
+    <script src="/javascripts/admin/homejs/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-<script>
-
-
+    <script>
 
 
 
 
-  let COD = document.getElementById('COD').innerHTML;
-  let Online = document.getElementById('Online').innerHTML;
+
+
+      let COD = document.getElementById('COD').innerHTML;
+      let Online = document.getElementById('Online').innerHTML;
 
 
 
-  var xValues = ["Cash on Delivery", "Online Payment"];
-  var yValues = [COD,Online];
-  var barColors = [
-    "#000000",
-    "#6c6c6c",
-    "#ffffff"
-  ];
-  
-  new Chart("myChart", {
-    type: "doughnut",
-    data: {
-      labels: xValues,
-      datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-      }]
-    },
-    
-  });
-  </script>
+      var xValues = ["Cash on Delivery", "Online Payment"];
+      var yValues = [COD, Online];
+      var barColors = [
+        "#000000",
+        "#6c6c6c",
+        "#ffffff"
+      ];
+
+      new Chart("myChart", {
+        type: "doughnut",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+
+      });
+    </script>
 
 
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>

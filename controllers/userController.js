@@ -51,44 +51,44 @@ let x;
 module.exports = {
   // User home page
   home: async (req, res) => {
-    try{
-    const allCategory = await categoryModel.find();
-    const todayDeal = await ProductModel.find({ description: "SPECIAL DEAL" });
-    if (req.session.userLogin) {
-      const user = req.session.user;
-      const userId = user._id;
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
+    try {
+      const allCategory = await categoryModel.find();
+      const todayDeal = await ProductModel.find({ description: "SPECIAL DEAL" });
+      if (req.session.userLogin) {
+        const user = req.session.user;
+        const userId = user._id;
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
+        res.render("user/home-page", {
+          user,
+          cartCount,
+          listCount,
+          allCategory,
+          todayDeal,
+        });
       } else {
-        var cartCount = 0;
+        res.render("user/home-page", { user: false, allCategory, todayDeal });
       }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
-      res.render("user/home-page", {
-        user,
-        cartCount,
-        listCount,
-        allCategory,
-        todayDeal,
-      });
-    } else {
-      res.render("user/home-page", { user: false, allCategory, todayDeal });
+    } catch {
+      res.redirect('/error');
     }
-  }catch{
-    res.redirect('/error');
-  }
   },
 
   // User signin page
   loginPage: (req, res) => {
     if (!req.session.userLogin) {
-      let pass=null
-      res.render("user/login",{pass});
+      let pass = null
+      res.render("user/login", { pass });
     } else {
       res.redirect("/");
     }
@@ -112,7 +112,7 @@ module.exports = {
     Password = req.body.password;
     Password2 = req.body.Cpassword;
 
-    const user = await UserModel.findOne({ email: Email }); 
+    const user = await UserModel.findOne({ email: Email });
     if (Password == Password2) {
       if (!user) {
         // send mail with defined transport object
@@ -199,26 +199,26 @@ module.exports = {
   },
 
   forVerfy: async (req, res) => {
-   let otp= req.body.otp
-   let email = req.body.email
-   console.log(req.body);
-   if(otp==req.body.otp){
-    res.render('user/setPassword',{email:email})
-  }else{
-   res.redirect('/for-verifyOtp')
-  }
+    let otp = req.body.otp
+    let email = req.body.email
+    console.log(req.body);
+    if (otp == req.body.otp) {
+      res.render('user/setPassword', { email: email })
+    } else {
+      res.redirect('/for-verifyOtp')
+    }
   },
 
-  resetPassword: async(req,res)=>{
-    let password=req.body.password
-    let repassword=req.body.Cpassword
-    let email=req.body.email
-    if(password==repassword){
-       password= await bcrypt.hash(password,10);
-      await UserModel.findOneAndUpdate({email:email},{$set:{password:password}})
-        res.redirect('/login')
+  resetPassword: async (req, res) => {
+    let password = req.body.password
+    let repassword = req.body.Cpassword
+    let email = req.body.email
+    if (password == repassword) {
+      password = await bcrypt.hash(password, 10);
+      await UserModel.findOneAndUpdate({ email: email }, { $set: { password: password } })
+      res.redirect('/login')
     }
-    else{
+    else {
       res.redirect('/changePassword')
     }
   },
@@ -275,7 +275,7 @@ module.exports = {
     if (!isMatch) {
       req.session.userLogin = false;
       let pass = 'err'
-      return res.render("user/login",{pass});
+      return res.render("user/login", { pass });
     }
     req.session.user = user;
     req.session.userId = user._id;
@@ -291,82 +291,82 @@ module.exports = {
     }
   },
 
- 
-  wishlist: async (req, res) => {
-    try{
-    const allCategory = await categoryModel.find();
-    if (req.session.userLogin) {
-      let user = req.session.user;
-      const userId = user._id;
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
-      } else {
-        var cartCount = 0;
-      }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
-      let list = await wishlistModel
-        .findOne({ userId: userId })
-        .populate("productId");
 
-      if (list) {
-        let wish = list.productId;
-        res.render("user/wishlist", {
-          wish,
-          allCategory,
-          listCount,
-          cartCount,
-          user,
-        });
-      } else {
-        res.redirect("/");
+  wishlist: async (req, res) => {
+    try {
+      const allCategory = await categoryModel.find();
+      if (req.session.userLogin) {
+        let user = req.session.user;
+        const userId = user._id;
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
+        let list = await wishlistModel
+          .findOne({ userId: userId })
+          .populate("productId");
+
+        if (list) {
+          let wish = list.productId;
+          res.render("user/wishlist", {
+            wish,
+            allCategory,
+            listCount,
+            cartCount,
+            user,
+          });
+        } else {
+          res.redirect("/");
+        }
       }
+    } catch {
+      res.redirect('/error')
     }
-  }catch{
-    res.redirect('/error')
-  }
   },
 
   addToWishlist: async (req, res) => {
-    if(req.session.userLogin){
-    let productId = req.params.id;
-    let userData = req.session.user;
-    let userId = userData._id;
-    let wishlist = await wishlistModel.findOne({ userId: userId });
-    if (wishlist) {
-      await wishlistModel
-        .findOneAndUpdate(
-          { userId: userId },
-          { $addToSet: { productId: productId } }
-        )
-        .then((response) => {
-          console.log(" product added to cart successfully");
-          res.json({ status: true });
+    if (req.session.userLogin) {
+      let productId = req.params.id;
+      let userData = req.session.user;
+      let userId = userData._id;
+      let wishlist = await wishlistModel.findOne({ userId: userId });
+      if (wishlist) {
+        await wishlistModel
+          .findOneAndUpdate(
+            { userId: userId },
+            { $addToSet: { productId: productId } }
+          )
+          .then((response) => {
+            console.log(" product added to cart successfully");
+            res.json({ status: true });
+          });
+      } else {
+        const wish = new wishlistModel({
+          userId,
+          productId: [productId],
         });
+        await wish
+          .save()
+          .then((response) => {
+            console.log(" product added to wishlist");
+            res.json({ status: true });
+          })
+          .catch((err) => {
+            console.log(err.message);
+            res.json({ status: false });
+          });
+      }
     } else {
-      const wish = new wishlistModel({
-        userId,
-        productId: [productId],
-      });
-      await wish
-        .save()
-        .then((response) => {
-          console.log(" product added to wishlist");
-          res.json({ status: true });
-        })
-        .catch((err) => {
-          console.log(err.message);
-          res.json({ status: false });
-        });
+      res.redirect('/')
     }
-  }else{
-    res.redirect('/')
-  }
   },
 
   deleteWishlist: async (req, res) => {
@@ -387,81 +387,81 @@ module.exports = {
   },
 
   cart: async (req, res) => {
-    try{
-    if (req.session.userLogin) {
-      const user = req.session.user;
-      const userId = user._id;
+    try {
+      if (req.session.userLogin) {
+        const user = req.session.user;
+        const userId = user._id;
 
-      const list = await cartModel
-        .findOne({ userId: userId })
-        .populate("products.productId")
-        .sort({products :-1});
+        const list = await cartModel
+          .findOne({ userId: userId })
+          .populate("products.productId")
+          .sort({ products: -1 });
 
-      const allCategory = await categoryModel.find();
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      const userCoupon = await UserModel.findOne({ _id: userId }); 
-      const applyCoupon = userCoupon.applyCoupon;
-      if (list) {
-        if (userCart) {
-          var cartCount = userCart.products.length;
+        const allCategory = await categoryModel.find();
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        const userCoupon = await UserModel.findOne({ _id: userId });
+        const applyCoupon = userCoupon.applyCoupon;
+        if (list) {
+          if (userCart) {
+            var cartCount = userCart.products.length;
+          } else {
+            var cartCount = 0;
+          }
+          if (userList) {
+            var listCount = userList.productId.length;
+          } else {
+            var listCount = 0;
+          }
+          const cartProducts = list.products;
+          const cartId = list._id;
+          if (cartCount == 0) {
+            await cartModel.findOneAndRemove({ userId: userId })
+          }
+          const Total = userCart.cartTotal;
+
+          if (applyCoupon) {
+            const usedCouponlen = userCoupon.usedCoupon.length - 1;
+            const usedCoupon = userCoupon.usedCoupon[usedCouponlen];
+            res.render("user/cart", {
+              cartId,
+              cartProducts,
+              Total,
+              user,
+              cartCount,
+              allCategory,
+              listCount,
+              list,
+              index: 1,
+              usedCoupon,
+              applyCoupon,
+              userCart,
+            });
+          } else {
+            res.render("user/cart", {
+              cartId,
+              cartProducts,
+              Total,
+              user,
+              cartCount,
+              allCategory,
+              listCount,
+              list,
+              index: 1,
+              usedCoupon: null,
+              applyCoupon,
+              userCart,
+            });
+          }
         } else {
-          var cartCount = 0;
+          res.redirect('/shopping')
         }
-        if (userList) {
-          var listCount = userList.productId.length;
-        } else {
-          var listCount = 0;
-        }
-        const cartProducts = list.products;
-        const cartId = list._id;
-        if(cartCount==0){
-          await cartModel.findOneAndRemove({userId : userId})
-        }
-        const Total = userCart.cartTotal;
-        
-        if (applyCoupon) {
-          const usedCouponlen = userCoupon.usedCoupon.length - 1;
-          const usedCoupon = userCoupon.usedCoupon[usedCouponlen];
-          res.render("user/cart", {
-            cartId,
-            cartProducts,
-            Total,
-            user,
-            cartCount,
-            allCategory,
-            listCount,
-            list,
-            index: 1,
-            usedCoupon,
-            applyCoupon,
-            userCart,
-          });
-        } else {
-          res.render("user/cart", {
-            cartId,
-            cartProducts,
-            Total,
-            user,
-            cartCount,
-            allCategory,
-            listCount,
-            list,
-            index: 1,
-            usedCoupon: null,
-            applyCoupon,
-            userCart,
-          });
-        }
-      }else{
-        res.redirect('/shopping')
-      } 
-    } else {
-      res.redirect("/");
+      } else {
+        res.redirect("/");
+      }
+    } catch {
+      res.redirect('/shopping')
     }
-  }catch{
-    res.redirect('/shopping')
-  }
   },
 
   Cartquantity: async (req, res) => {
@@ -537,160 +537,160 @@ module.exports = {
   },
 
   allproducts: async (req, res) => {
-    try{
-    const allCategory = await categoryModel.find();
-    const totalproducts = await ProductModel.find();
+    try {
+      const allCategory = await categoryModel.find();
+      const totalproducts = await ProductModel.find();
 
-    if (req.session.userLogin) {
-      const user = req.session.user;
-      const userId = user._id;
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
+      if (req.session.userLogin) {
+        const user = req.session.user;
+        const userId = user._id;
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
+        res.render("user/allproducts", {
+          totalproducts,
+          user,
+          cartCount,
+          allCategory,
+          listCount,
+        });
       } else {
-        var cartCount = 0;
+        res.render("user/allproducts", {
+          totalproducts,
+          user: false,
+          allCategory,
+        });
       }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
-      res.render("user/allproducts", {
-        totalproducts,
-        user,
-        cartCount,
-        allCategory,
-        listCount,
-      });
-    } else {
-      res.render("user/allproducts", {
-        totalproducts,
-        user: false,
-        allCategory,
-      });
+    } catch {
+      res.redirect('/error')
     }
-  }catch{
-    res.redirect('/error')
-  }
   },
 
   productpage: async (req, res) => {
-    try{
-    const allCategory = await categoryModel.find();
-    const id = req.params.id;
-    const totalproducts = await ProductModel.findById({ _id: id });
+    try {
+      const allCategory = await categoryModel.find();
+      const id = req.params.id;
+      const totalproducts = await ProductModel.findById({ _id: id });
 
-    if (req.session.userLogin) {
-      const user = req.session.user;
-      const userId = user._id;
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
+      if (req.session.userLogin) {
+        const user = req.session.user;
+        const userId = user._id;
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
+        res.render("user/product-page", {
+          totalproducts,
+          user,
+          cartCount,
+          allCategory,
+          listCount,
+        });
       } else {
-        var cartCount = 0;
+        res.render("user/product-page", {
+          totalproducts,
+          user: false,
+          allCategory,
+        });
       }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
-      res.render("user/product-page", {
-        totalproducts,
-        user,
-        cartCount,
-        allCategory,
-        listCount,
-      });
-    } else {
-      res.render("user/product-page", {
-        totalproducts,
-        user: false,
-        allCategory,
-      });
-    }
-    }catch{
+    } catch {
       res.redirect('/error')
     }
   },
 
   addToCart: async (req, res) => {
-    try{
-    if (req.session.userLogin) {
-      let productId = req.params.id;
-      let userData = req.session.user;
+    try {
+      if (req.session.userLogin) {
+        let productId = req.params.id;
+        let userData = req.session.user;
 
-      let userId = userData._id;
+        let userId = userData._id;
 
-      let product = await ProductModel.findOne({ _id: productId });
-      let total = product.price;
+        let product = await ProductModel.findOne({ _id: productId });
+        let total = product.price;
 
-      let cartExist = await cartModel.findOne({ userId: userId });
-      console.log(cartExist, "cartExistcartExistcartExist");
+        let cartExist = await cartModel.findOne({ userId: userId });
+        console.log(cartExist, "cartExistcartExistcartExist");
 
-      if (cartExist) {
-        const productExist = await cartModel.findOne({
-          userId,
-          "products.productId": productId,
-        });
+        if (cartExist) {
+          const productExist = await cartModel.findOne({
+            userId,
+            "products.productId": productId,
+          });
 
-        if (productExist) {
-          if (product.category) {
+          if (productExist) {
+            if (product.category) {
+              await cartModel
+                .findOneAndUpdate(
+                  { userId, "products.productId": productId },
+                  {
+                    $inc: {
+                      "products.$.quantity": 1,
+                      "products.$.total": total,
+                      cartTotal: total,
+                    },
+                  }
+                )
+                .then((response) => {
+                  console.log(" product already exist in cart");
+                  res.json({ status: true });
+                });
+            } else {
+            }
+          } else {
             await cartModel
               .findOneAndUpdate(
-                { userId, "products.productId": productId },
+                { userId: userId },
                 {
-                  $inc: {
-                    "products.$.quantity": 1,
-                    "products.$.total": total,
-                    cartTotal: total,
-                  },
+                  $push: { products: { productId, total } },
+                  $inc: { cartTotal: total },
                 }
               )
-              .then((response) => {
-                console.log(" product already exist in cart");
+              .then(() => {
+                console.log(" product added to cart successfully");
                 res.json({ status: true });
               });
-          } else {
           }
         } else {
-          await cartModel
-            .findOneAndUpdate(
-              { userId: userId },
-              {
-                $push: { products: { productId, total } },
-                $inc: { cartTotal: total },
-              }
-            )
+          const cartProduct = new cartModel({
+            userId,
+            products: [{ productId, total }],
+            cartTotal: total,
+          });
+          await cartProduct
+            .save()
             .then(() => {
               console.log(" product added to cart successfully");
               res.json({ status: true });
+            })
+            .catch((err) => {
+              console.log(err.message);
+              res.json({ status: false });
             });
         }
       } else {
-        const cartProduct = new cartModel({
-          userId,
-          products: [{ productId, total }],
-          cartTotal: total,
-        });
-        await cartProduct
-          .save()
-          .then(() => {
-            console.log(" product added to cart successfully");
-            res.json({ status: true });
-          })
-          .catch((err) => {
-            console.log(err.message);
-            res.json({ status: false });
-          });
+        res.redirect("/login");
       }
-    } else {
-      res.redirect("/login");
+    } catch {
+      res.redirect('/error')
     }
-  }catch{
-    res.redirect('/error')
-  }
   },
 
 
@@ -718,132 +718,133 @@ module.exports = {
 
   productCategory: async (req, res) => {
     // res.send("You just created a User ...!!!");
-    try{
-    const id = req.params.id;
-    const Category = await categoryModel.findById({ _id: id });
-    const products = await ProductModel.find({ category: Category.category });
-    const allCategory = await categoryModel.find();
-    const totalproducts = await ProductModel.find();
-    if (req.session.userLogin) {
-      const user = req.session.user;
-      const userId = user._id;
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
+    try {
+      const id = req.params.id;
+      const Category = await categoryModel.findById({ _id: id });
+      const products = await ProductModel.find({ category: Category.category });
+      const allCategory = await categoryModel.find();
+      const totalproducts = await ProductModel.find();
+      if (req.session.userLogin) {
+        const user = req.session.user;
+        const userId = user._id;
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
+        res.render("user/categoryproducts", {
+          user,
+          cartCount,
+          allCategory,
+          totalproducts,
+          products,
+          listCount,
+          Category,
+        });
       } else {
-        var cartCount = 0;
+        res.render("user/categoryproducts", {
+          user: false,
+          allCategory,
+          totalproducts,
+          products, Category,
+        });
       }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
-      res.render("user/categoryproducts", {
-        user,
-        cartCount,
-        allCategory,
-        totalproducts,
-        products,
-        listCount,
-      });
-    } else {
-      res.render("user/categoryproducts", {
-        user: false,
-        allCategory,
-        totalproducts,
-        products,
-      });
-    }
-    }catch{
+    } catch {
       res.redirect('/error')
     }
   },
 
   checkout: async (req, res) => {
-    try{
-    if (req.session.userLogin) {
-      const allCategory = await categoryModel.find();
-      const user = req.session.user;
-      const userId = user._id;
-      const userAddress = await addressModel.find({ userId: userId });
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      const Total = userCart.cartTotal;
-      if (userCart) {
-        var cartCount = userCart.products.length;
-      } else {
-        var cartCount = 0;
-      }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
+    try {
+      if (req.session.userLogin) {
+        const allCategory = await categoryModel.find();
+        const user = req.session.user;
+        const userId = user._id;
+        const userAddress = await addressModel.find({ userId: userId });
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        const Total = userCart.cartTotal;
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
 
-      res.render("user/checkout", {
-        user,
-        cartCount,
-        allCategory,
-        Total,
-        userAddress,
-        userCart,
-        listCount,
-      });
-    } else {
-      res.redirect("/login");
+        res.render("user/checkout", {
+          user,
+          cartCount,
+          allCategory,
+          Total,
+          userAddress,
+          userCart,
+          listCount,
+        });
+      } else {
+        res.redirect("/login");
+      }
+    } catch {
+      res.redirect('/error');
     }
-  }catch{
-    res.redirect('/error');
-  }
   },
 
   newAddress: async (req, res) => {
-    try{
-    if (req.session.userLogin) {
-      const allCategory = await categoryModel.find();
-      const user = req.session.user;
-      const userId = user._id;
-      console.log(user);
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
-      } else {
-        var cartCount = 0;
-      }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
+    try {
+      if (req.session.userLogin) {
+        const allCategory = await categoryModel.find();
+        const user = req.session.user;
+        const userId = user._id;
+        console.log(user);
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
 
-      if (user) {
-        res.render("user/newAddress", {
-          user,
-          cartCount,
-          listCount,
-          allCategory,
-        });
-      } else {
-        res.redirect("/checkout");
+        if (user) {
+          res.render("user/newAddress", {
+            user,
+            cartCount,
+            listCount,
+            allCategory,
+          });
+        } else {
+          res.redirect("/checkout");
+        }
       }
+    } catch {
+      res.redirect('/error')
     }
-  }catch{
-    res.redirect('/error')
-  }
   },
 
   addAddress: async (req, res) => {
     try {
-    if (req.session.userLogin) {
-      // const address = req.body
-      const user = req.session.user;
-      const userId = user._id;
-      console.log(req.body);
-    
+      if (req.session.userLogin) {
+        // const address = req.body
+        const user = req.session.user;
+        const userId = user._id;
+        console.log(req.body);
 
-      
+
+
         const newAddress = await addressModel({
           userId: userId,
           firstName: req.body.firstName,
@@ -858,46 +859,46 @@ module.exports = {
         newAddress.save().then(() => {
           res.redirect("/checkout");
         });
+      }
+    } catch {
+      res.redirect("/checkout");
     }
-  } catch {
-    res.redirect("/checkout");
-  }
   },
 
   userProfile: async (req, res) => {
-    try{
-    const allCategory = await categoryModel.find();
+    try {
+      const allCategory = await categoryModel.find();
 
-    if (req.session.userLogin) {
-      const user = req.session.user;
-      const userId = user._id;
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
-      } else {
-        var cartCount = 0;
-      }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
+      if (req.session.userLogin) {
+        const user = req.session.user;
+        const userId = user._id;
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
 
-      if (user) {
-        res.render("user/userProfile", {
-          user,
-          cartCount,
-          listCount,
-          allCategory,
-        });
-      } else {
-        res.redirect("/login");
+        if (user) {
+          res.render("user/userProfile", {
+            user,
+            cartCount,
+            listCount,
+            allCategory,
+          });
+        } else {
+          res.redirect("/login");
+        }
       }
+    } catch {
+      res.redirect("/error")
     }
-  }catch{
-    res.redirect("/error")
-  }
   },
 
   userOrdering: async (req, res) => {
@@ -964,8 +965,8 @@ module.exports = {
         .createHmac("sha256", "pLcS6cFId3QitNuJzTmbHJde")
         .update(
           data["payment[razorpay_order_id]"] +
-            "|" +
-            data["payment[razorpay_payment_id]"]
+          "|" +
+          data["payment[razorpay_payment_id]"]
         )
         .digest("hex");
       const orderId = data["orders[receipt]"];
@@ -1044,7 +1045,7 @@ module.exports = {
     if (userCart) {
       var cartCount = userCart.products.length;
     } else {
-      var cartCount = 0; 
+      var cartCount = 0;
     }
     if (userList) {
       var listCount = userList.productId.length;
@@ -1055,7 +1056,7 @@ module.exports = {
     const orders = await orderModel
       .find({ userId: userId })
       .populate("items.productId")
-      .sort({ createdAt: -1});
+      .sort({ createdAt: -1 });
 
     if (orders) {
       res.render("user/orders", {
@@ -1123,8 +1124,8 @@ module.exports = {
       console.log(cartTotal);
       let date = new Date();
       if (user.applyCoupon) {
-        let last = amountTotal/(100 - copdisc);
-        var original = last*100;
+        let last = amountTotal / (100 - copdisc);
+        var original = last * 100;
         console.log("have copen");
         await UserModel.updateOne(
           { _id: userId },
@@ -1226,43 +1227,44 @@ module.exports = {
   },
 
   viewOrder: async (req, res) => {
-    try{
-    const allCategory = await categoryModel.find();
+    try {
+      const allCategory = await categoryModel.find();
 
-    if (req.session.userLogin) {
-      const orderId = req.params.id;
-      const user = req.session.user;
-      const userId = user._id;
-      const userCart = await cartModel.findOne({ userId: userId });
-      const userList = await wishlistModel.findOne({ userId: userId });
-      if (userCart) {
-        var cartCount = userCart.products.length;
-      } else {
-        var cartCount = 0;
+      if (req.session.userLogin) {
+        const orderId = req.params.id;
+        const user = req.session.user;
+        const userId = user._id;
+        const userCart = await cartModel.findOne({ userId: userId });
+        const userList = await wishlistModel.findOne({ userId: userId });
+        if (userCart) {
+          var cartCount = userCart.products.length;
+        } else {
+          var cartCount = 0;
+        }
+        if (userList) {
+          var listCount = userList.productId.length;
+        } else {
+          var listCount = 0;
+        }
+        const orders = await orderModel
+          .find({ _id: orderId })
+          .populate("items.productId");
+        if (orders) {
+          res.render("user/view-Order", {
+            user,
+            cartCount,
+            listCount,
+            allCategory,
+            orders,
+            orderId,
+          });
+        } else {
+          res.redirect("/orders");
+        }
       }
-      if (userList) {
-        var listCount = userList.productId.length;
-      } else {
-        var listCount = 0;
-      }
-      const orders = await orderModel
-        .find({ _id: orderId })
-        .populate("items.productId");
-      if (orders) {
-        res.render("user/view-Order", {
-          user,
-          cartCount,
-          listCount,
-          allCategory,
-          orders,
-        });
-      } else {
-        res.redirect("/orders");
-      }
+    } catch {
+      res.redirect('/error')
     }
-  }catch{
-    res.redirect('/error')
-  }
   },
   cancelOrder: async (req, res) => {
     const orderId = req.params.id;
@@ -1294,21 +1296,21 @@ module.exports = {
     });
   },
 
-  error : (req,res)=>{
-     res.render('user/404Page');
-  }, 
+  error: (req, res) => {
+    res.render('user/404Page');
+  },
 
 
-  search : async (req,res)=>{
-    try{ 
+  search: async (req, res) => {
+    try {
       let search = req.body.search
       let product = await ProductModel.find({
         "$or": [
-            { productName: { '$regex': search, '$options': 'i' } },
-            { category: { '$regex': search, '$options': 'i' } }
+          { productName: { '$regex': search, '$options': 'i' } },
+          { category: { '$regex': search, '$options': 'i' } }
         ]
-    })
-     
+      })
+
       const allCategory = await categoryModel.find();
       const todayDeal = await ProductModel.find({ description: "SPECIAL DEAL" });
       if (req.session.userLogin) {
@@ -1326,23 +1328,23 @@ module.exports = {
         } else {
           var listCount = 0;
         }
-        
-        res.render("user/search", {  
+
+        res.render("user/search", {
           user,
           cartCount,
           listCount,
           allCategory,
           todayDeal,
-          product, 
+          product,
           search,
         });
       } else {
-        res.render("user/search", { user: false, allCategory, todayDeal,product,search});
+        res.render("user/search", { user: false, allCategory, todayDeal, product, search });
       }
-    }catch{
+    } catch {
       res.redirect('/error');
     }
-     
+
   },
 
 

@@ -1,9 +1,5 @@
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-  crossorigin="anonymous"
-/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
 
 <style>
   .order_d_inner .details_item h4 {
@@ -13,30 +9,37 @@
     color: #222222;
     padding-left: 18px;
   }
+
   .order_d_inner .details_item .list {
     padding-left: 10px;
   }
+
   @media (min-width: 767px) {
     .order_d_inner .details_item .list {
       margin-bottom: 30px;
     }
   }
+
   .order_d_inner .details_item .list li {
     margin-bottom: 8px;
   }
+
   .order_d_inner .details_item .list li:last-child {
     margin-bottom: 0px;
   }
+
   .order_d_inner .details_item .list li a {
     font-size: 14px;
     color: #222222;
     font-family: "Roboto", sans-serif;
   }
+
   .order_d_inner .details_item .list li a span {
     width: 145px;
     display: inline-block;
     color: #777777;
   }
+
   ul {
     list-style: none;
   }
@@ -53,41 +56,50 @@
     padding: 30px;
     margin-top: 75px;
   }
+
   @media (min-width: 767px) {
     .order_details_table {
       margin-top: 45px;
     }
   }
+
   .order_details_table h2 {
     color: #222222;
     font-size: 18px;
     padding-bottom: 15px;
   }
+
   .order_details_table .table {
     margin-bottom: 0px;
   }
+
   .order_details_table .table thead tr th {
     border-bottom: 1px solid #ddd;
     font-size: 14px;
     font-family: "Roboto", sans-serif;
     font-weight: normal;
   }
+
   .order_details_table .table tbody tr td p {
     margin-bottom: 0px;
   }
+
   .order_details_table .table tbody tr td h5 {
     color: #222222;
     margin-bottom: 0px;
   }
+
   .order_details_table .table tbody tr td h4 {
     font-size: 14px;
     text-transform: uppercase;
     margin-bottom: 0px;
     color: #222222;
   }
+
   .order_details_table .table tbody tr:last-child td {
     border-top: 1px solid #ddd;
   }
+
   .order_details_table .table tbody tr:last-child td p {
     color: #222222;
   }
@@ -95,179 +107,173 @@
 
 <%- include('../user/layout/user-header.ejs') -%>
 
-<section class="order_details section_gap">
+  <section class="order_details section_gap m-3">
     <div class="container-fluid">
-        <h4 class="section-title position-relative text-uppercase mb-3 ml-5"><span class="bg-secondary pr-3">Order summary </span></h4>
-</div>
-<% if(orders  ){ %>
-    <div class="container-fluid mt-5">
-    <% orders.forEach((obj)=>{ %> 
-      <div class="row order_d_inner">
-        <div class="col-lg-4 col-sm-12 ">
-          <div class="details_item">
-            <h4>Order Info</h4>
-            <ul class="list">
-              <li>
-                <a href="#" style="text-decoration: none;"><span>Order Id</span> :<%= obj._id %> </a>
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>Date</span> : <%= obj.createdAt.toLocaleDateString() %>  </a
-                >
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"><span>Total</span> : <%= obj.totalAmount %>  </a>
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>Payment method</span> : <%= obj.paymentMethod %>  </a
-                >
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>Total Products</span> : <%= obj.totalProduct %>  </a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="details_item">
-            <h4>Customer Details</h4>
-            <ul class="list">
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>First Name</span> : <%= obj.Address.firstName %>  </a
-                >
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>Last Name</span> : <%= obj.Address.lastName %> </a
-                >
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"><span>Mobile.No</span> : <%= obj.Address.mobileNo %> </a>
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>Email</span> : <%= obj.Address.email %> </a
-                >
-              </li>
-            
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="details_item">
-            <h4 >Billing Address</h4>
-            <ul class="list ">
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>State</span> : <%= obj.Address.state %> </a
-                >
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"><span>City</span> : <%= obj.Address.city %></a>
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>Country</span> : <%= obj.Address.country %></a
-                >
-              </li>
-              <li>
-                <a href="#" style="text-decoration: none;"
-                  ><span>Home Address </span> :<br> <%= obj.Address.address %> </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="order_details_table">
-        <h2>Payment Details</h2>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% obj.items.forEach((ob)=>{ %> 
-              <tr>
-                <td>
-                 <%= ob.productId.productName %> 
-                </td>
-                <td>
-                  <%= ob.productId.price %> 
-                 </td>
-                <td>
-                  <%= ob.quantity %> 
-                </td>
-                <td>
-                 <%= ob.total %>
-                </td>
-              </tr>
-              <% }) %> 
-              <tr>
-                <td>
-                  <h5>Grand Total</h5>
-                </td>
-                <td>
-                  <h5></h5>
-                </td>
-                <td>
-                  <p></p>
-                </td>
-                <td>
-                  <h5><%= obj.totalAmount %> </h5>
-                </td>
-              </tr>
-          
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class=" text-center mt-5">
-        <% if(obj.orderStatus == "Canceled"){ %> 
-          <a class="btn btn-warning" href="">Your order has been cancelled</a>
-        <% }else{ %> 
-          <a href="/cancelOrder/<%= obj._id %> "  type="button" class="btn btn-danger">Cancel order</a>
-          <% } %> 
-        <a class="btn btn-outline-primary" href="/shopping">Go back to Shopping</a>
-     
-      </div>
-      <% }) %> 
+      <h4 class="section-title position-relative text-uppercase mb-3 "><span class="bg-secondary pr-3">Order summary
+        </span></h4>
     </div>
-    <%}else{%>
-      <div class="container-fluid  mt-100 ">
-        <div class="row">
-        
-         <div class="col-md-12">
-         
-             
-           
-           <div class="card-body cart">
-               <div class="col-sm-12 empty-cart-cls text-center">
-                 <img src="https://cdni.iconscout.com/illustration/free/thumb/empty-cart-4085814-3385483.png" width="250" height="250" class="img-fluid  mr-3">
-                 <h3><strong>Your Cart is Empty</strong></h3>
-                 <h4>Add something to make me happy :)</h4>
-                 <a href="/shopping" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
-                 
-               
-               </div>
-           </div>
-       
-           
-         
-         </div>
-        
+    <% if(orders ){ %>
+      <div class="container-fluid mt-5">
+        <% orders.forEach((obj)=>{ %>
+          <div class="row order_d_inner">
+            <div class="col-lg-4 col-sm-12 ">
+              <div class="details_item">
+                <h4>Order Info</h4>
+                <ul class="list">
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Order Id</span> :<%= obj._id %> </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Date</span> : <%=
+                        obj.createdAt.toLocaleDateString() %> </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Total</span> : <%= obj.totalAmount %> </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Payment method</span> : <%= obj.paymentMethod %>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Total Products</span> : <%= obj.totalProduct %>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="details_item">
+                <h4>Customer Details</h4>
+                <ul class="list">
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>First Name</span> : <%= obj.Address.firstName %>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Last Name</span> : <%= obj.Address.lastName %> </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Mobile.No</span> : <%= obj.Address.mobileNo %> </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Email</span> : <%= obj.Address.email %> </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="details_item">
+                <h4>Billing Address</h4>
+                <ul class="list ">
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>State</span> : <%= obj.Address.state %> </a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>City</span> : <%= obj.Address.city %></a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Country</span> : <%= obj.Address.country %></a>
+                  </li>
+                  <li>
+                    <a href="#" style="text-decoration: none;"><span>Home Address </span> :<br>
+                      <%= obj.Address.address %>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="order_details_table">
+            <h2>Payment Details</h2>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% obj.items.forEach((ob)=>{ %>
+                    <tr>
+                      <td>
+                        <%= ob.productId.productName %>
+                      </td>
+                      <td>
+                        <%= ob.productId.price %>
+                      </td>
+                      <td>
+                        <%= ob.quantity %>
+                      </td>
+                      <td>
+                        <%= ob.total %>
+                      </td>
+                    </tr>
+                    <% }) %>
+                      <tr>
+                        <td>
+                          <h5>Grand Total</h5>
+                        </td>
+                        <td>
+                          <h5></h5>
+                        </td>
+                        <td>
+                          <p></p>
+                        </td>
+                        <td>
+                          <h5>
+                            <%= obj.totalAmount %>
+                          </h5>
+                        </td>
+                      </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class=" text-center mt-5">
+            <% if(obj.orderStatus=="Canceled" ){ %>
+              <a class="btn btn-warning" href="">Your order has been cancelled</a>
+              <% }else{ %>
+                <a href="/cancelOrder/<%= obj._id %> " type="button" class="btn btn-danger">Cancel order</a>
+                <% } %>
+                  <a class="btn btn-outline-primary" href="/shopping">Go back to Shopping</a>
+
+          </div>
+          <% }) %>
+      </div>
+      <%}else{%>
+        <div class="container-fluid  mt-100 ">
+          <div class="row">
+
+            <div class="col-md-12">
+
+
+
+              <div class="card-body cart">
+                <div class="col-sm-12 empty-cart-cls text-center">
+                  <img src="https://cdni.iconscout.com/illustration/free/thumb/empty-cart-4085814-3385483.png"
+                    width="250" height="250" class="img-fluid  mr-3">
+                  <h3><strong>Your Cart is Empty</strong></h3>
+                  <h4>Add something to make me happy :)</h4>
+                  <a href="/shopping" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue
+                    shopping</a>
+
+
+                </div>
+              </div>
+
+
+
+            </div>
+
+          </div>
+
         </div>
-       
-       </div>
-       <%}%>
+        <%}%>
   </section>
 
-<%- include('../user/layout/user-footer.ejs') -%>
+  <%- include('../user/layout/user-footer.ejs') -%>

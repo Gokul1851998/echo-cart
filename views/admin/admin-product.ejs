@@ -20,7 +20,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Category</th>
-                <th scope="col">Size</th> 
+                <th scope="col">Size</th>
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
                 <th scope="col">Image</th>
@@ -39,29 +39,34 @@
                   <td>
                     <%= totalproducts.category%>
                   </td>
-                  
-                    <td>
-                      <%= totalproducts.size%>
-                    </td>
-                    <td>
+
+                  <td>
+                    <%= totalproducts.size%>
+                  </td>
+                  <td>
                     <%= totalproducts.description %>
                   </td>
                   <td>
                     <%= totalproducts.price %>
-                 </td>
-                 <td><img src='/images/product/<%= totalproducts.Image[0] %>' alt="" class="bt-0"  style="height: 50px; width: 50px;"></td>
-               <td>
-               
-                  <a href="/admin/editproductpage/<%= totalproducts._id %>" class="p  bg-warning px-1 py-2 rounded " type="button" value="Submit" style="text-decoration: none; font-weight: bold; color: #fff;"> Update </a>
-                      <a href="/admin/deleteproduct/<%= totalproducts._id %>" class="p bg-danger px-1 py-2 rounded " type="button" value="Submit" style="text-decoration: none; font-weight: bold; color:#fff;">Delete</a>
-                    
-                
-            
-               </td>
-              </tr>
-              <% }) %>
-             
-         
+                  </td>
+                  <td><img src='/images/product/<%= totalproducts.Image[0] %>' alt="" class="bt-0"
+                      style="height: 50px; width: 50px;"></td>
+                  <td>
+
+                    <a href="/admin/editproductpage/<%= totalproducts._id %>" class="p  bg-warning px-1 py-2 rounded "
+                      type="button" value="Submit" style="text-decoration: none; font-weight: bold; color: #fff;">
+                      Update </a>
+                    <a href="/admin/deleteproduct/<%= totalproducts._id %>" class="p bg-danger px-1 py-2 rounded "
+                      type="button" value="Submit"
+                      style="text-decoration: none; font-weight: bold; color:#fff;">Delete</a>
+
+
+
+                  </td>
+                </tr>
+                <% }) %>
+
+
             </tbody>
           </table>
         </div>
