@@ -538,8 +538,19 @@ module.exports = {
 
   allproducts: async (req, res) => {
     try {
+      const pageNum = Number(req.query.page)
+      console.log(pageNum)
+      const perPage = 12;
+      let docCount;
       const allCategory = await categoryModel.find();
-      const totalproducts = await ProductModel.find();
+      const CountProducts = await ProductModel.find()
+      const totalproducts = await ProductModel.find().countDocuments().then((documents) => {
+        docCount = documents;
+        return ProductModel.find({})
+          .skip((pageNum - 1) * perPage)
+          .limit(perPage);
+      });
+      const productCount = CountProducts.length
 
       if (req.session.userLogin) {
         const user = req.session.user;
@@ -562,12 +573,20 @@ module.exports = {
           cartCount,
           allCategory,
           listCount,
+          currentPage: pageNum,
+          totalDocuments: docCount,
+          pages: Math.ceil(docCount / perPage),
+          productCount,
         });
       } else {
         res.render("user/allproducts", {
           totalproducts,
           user: false,
           allCategory,
+          currentPage: pageNum,
+          totalDocuments: docCount,
+          pages: Math.ceil(docCount / perPage),
+          productCount,
         });
       }
     } catch {
@@ -1057,6 +1076,7 @@ module.exports = {
       .find({ userId: userId })
       .populate("items.productId")
       .sort({ createdAt: -1 });
+      console.log(orders)
 
     if (orders) {
       res.render("user/orders", {

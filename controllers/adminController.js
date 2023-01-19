@@ -22,8 +22,8 @@ module.exports = {
     admin: (req, res) => {
 
         if (!req.session.adminLogin) {
-
-            res.render('admin/admin-login')
+            let err = false
+            res.render('admin/admin-login',{err})
         } else {
 
             res.redirect('/admin')
@@ -38,7 +38,8 @@ module.exports = {
             req.session.adminLogin = true
             res.redirect('/admin/dash')
         } else {
-            res.redirect('/admin')
+            let err = true
+            res.render('admin/admin-login',{err})
         }
 
     },

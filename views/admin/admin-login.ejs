@@ -64,6 +64,9 @@
 							</div>
 							<input type="password" class="form-control" placeholder="password" name="password">
 						</div>
+						<% if(err==true ){%>
+							<p style="color: red;">Incorrect password</p>
+							<%}%>
 
 						<div class="form-group">
 							<input type="submit" value="Login" class="btn btn-warning float-right login_btn rounded">
