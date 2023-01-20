@@ -1252,6 +1252,7 @@ module.exports = {
 
       if (req.session.userLogin) {
         const orderId = req.params.id;
+        console.log(orderId,'orderIdorderIdorderId');
         const user = req.session.user;
         const userId = user._id;
         const userCart = await cartModel.findOne({ userId: userId });
@@ -1269,6 +1270,8 @@ module.exports = {
         const orders = await orderModel
           .find({ _id: orderId })
           .populate("items.productId");
+          console.log(orders,'ordersordersorders');
+         
         if (orders) {
           res.render("user/view-Order", {
             user,
